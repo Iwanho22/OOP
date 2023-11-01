@@ -9,4 +9,8 @@ public class NumberComparator {
             return b;
         }
     }
+
+    public static int max(int a, int b, int c) {
+        return max(max(a,b),c);
+    }
 }
