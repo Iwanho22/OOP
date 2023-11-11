@@ -1,6 +1,5 @@
 package ch.hslu.oop.sw07;
 
-import java.util.Comparator;
 import java.util.Objects;
 
 final public class Person implements Comparable<Person> {
