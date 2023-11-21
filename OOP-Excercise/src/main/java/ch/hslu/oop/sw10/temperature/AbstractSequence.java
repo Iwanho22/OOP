@@ -1,4 +1,4 @@
-package ch.hslu.oop.sw08;
+package ch.hslu.oop.sw10.temperature;
 
 import java.util.*;
 

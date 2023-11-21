@@ -1,4 +1,5 @@
-package ch.hslu.oop.sw08;
+package ch.hslu.oop.sw10.temperature;
+
 
 public interface TemperatureSequence extends Sequence<Temperature> {
 
