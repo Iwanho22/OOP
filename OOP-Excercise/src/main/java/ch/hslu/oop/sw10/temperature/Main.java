@@ -1,5 +1,6 @@
 package ch.hslu.oop.sw10.temperature;
 
+import ch.hslu.oop.sw10.temperature.event.TemperatureChangeEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,6 +14,8 @@ public class Main {
         String input = "";
         Scanner scanner = new Scanner(System.in);
         var tempSequence = new DefaultTemperatureSequence();
+        tempSequence.addTemperatureChangeListener(Main::handleTemperatureChangEvent);
+
         while (!"exit".equals(input)) {
             System.out.println("Bitte Temperatur eingeben (oder 'exit' zum Beenden): ");
             input = scanner.next();
@@ -20,7 +23,7 @@ public class Main {
                 float value = Float.parseFloat(input);
                 var temp =  Temperature.createFromCelsius(value);
                 tempSequence.add(temp);
-                LOG.warn(temp.toString() + " added");
+                LOG.warn(temp + " added");
             } catch (NumberFormatException e) {
                 LOG.error("Fehler beim konvertieren der Temperatur -> Eingabe ist keine Zahl");
             }
@@ -31,5 +34,12 @@ public class Main {
         System.out.println("Programm beendet.");
 
 
+    }
+
+    private static void handleTemperatureChangEvent(TemperatureChangeEvent e) {
+        switch (e.getTemperatureChangeState()){
+            case NEW_MAX -> LOG.info("New Max-Temperature: " + e.getNewTemperature());
+            case NEW_MIN -> LOG.info("New Min-Temperature: " + e.getNewTemperature());
+        }
     }
 }
