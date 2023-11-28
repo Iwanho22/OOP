@@ -1,11 +1,6 @@
-package ch.hslu.oop.sw10.temperature;
+package ch.hslu.oop.sw08;
 
-import ch.hslu.oop.sw08.Sequence;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public abstract class AbstractSequence<T extends Comparable<T>> implements Sequence<T> {
     protected final List<T> items;

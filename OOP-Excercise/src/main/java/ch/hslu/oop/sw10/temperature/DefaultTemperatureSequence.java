@@ -1,8 +1,10 @@
 package ch.hslu.oop.sw10.temperature;
 
-import ch.hslu.oop.sw10.temperature.event.TemperatureChangeEvent;
-import ch.hslu.oop.sw10.temperature.event.TemperatureChangeListener;
-import ch.hslu.oop.sw10.temperature.event.TemperatureChangeState;
+
+
+import ch.hslu.oop.sw10.temperature.event.TemperatureExtreamListener;
+import ch.hslu.oop.sw10.temperature.event.TemperatureExtremaEvent;
+import ch.hslu.oop.sw10.temperature.event.TemperatureExtremaType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.Objects;
 
 public final class DefaultTemperatureSequence extends AbstractSequence<Temperature> implements TemperatureSequence {
 
-    private final List<TemperatureChangeListener> temperatureChangeListeners = new ArrayList<>();
+    private final List<TemperatureExtreamListener> temperatureChangeListeners = new ArrayList<>();
 
     @Override
     public float maxTemperature() {
@@ -30,14 +32,14 @@ public final class DefaultTemperatureSequence extends AbstractSequence<Temperatu
     }
 
     @Override
-    public void addTemperatureChangeListener(TemperatureChangeListener listener) {
+    public void addTemperatureExtremaListener(TemperatureExtreamListener listener) {
         if (listener != null) {
             temperatureChangeListeners.add(listener);
         }
     }
 
     @Override
-    public void removeTemperatureChangeListener(TemperatureChangeListener listener) {
+    public void removeTemperatureChangeListener(TemperatureExtreamListener listener) {
         temperatureChangeListeners.remove(listener);
     }
 
@@ -45,11 +47,11 @@ public final class DefaultTemperatureSequence extends AbstractSequence<Temperatu
     public void add(Temperature item) {
         super.add(item);
 
-        TemperatureChangeEvent event = null;
+        TemperatureExtremaEvent event = null;
         if (Objects.equals(item, max())) {
-            event = new TemperatureChangeEvent(this, item, TemperatureChangeState.NEW_MAX);
+            event = new TemperatureExtremaEvent(this, item, TemperatureExtremaType.NEW_MAX);
         } else if (Objects.equals(item, min())) {
-            event = new TemperatureChangeEvent(this, item, TemperatureChangeState.NEW_MIN);
+            event = new TemperatureExtremaEvent(this, item, TemperatureExtremaType.NEW_MIN);
         }
 
         if (event != null) {
@@ -57,7 +59,7 @@ public final class DefaultTemperatureSequence extends AbstractSequence<Temperatu
         }
     }
 
-    private void fireTemperatureChangeEvent(TemperatureChangeEvent e) {
+    private void fireTemperatureChangeEvent(TemperatureExtremaEvent e) {
         temperatureChangeListeners.forEach(l -> l.maxTemperatureChange(e));
     }
 }

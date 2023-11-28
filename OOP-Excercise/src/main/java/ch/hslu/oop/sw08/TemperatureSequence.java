@@ -1,7 +1,6 @@
-package ch.hslu.oop.sw10.temperature;
+package ch.hslu.oop.sw08;
 
 import ch.hslu.oop.sw10.temperature.event.TemperatureExtreamListener;
-
 
 public interface TemperatureSequence extends Sequence<Temperature> {
 
@@ -10,7 +9,4 @@ public interface TemperatureSequence extends Sequence<Temperature> {
     float minTemperature();
 
     float average();
-
-    void addTemperatureExtremaListener(TemperatureExtreamListener listener);
-    void removeTemperatureChangeListener(TemperatureExtreamListener listener);
 }

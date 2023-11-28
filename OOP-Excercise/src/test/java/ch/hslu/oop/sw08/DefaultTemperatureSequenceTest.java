@@ -1,7 +1,6 @@
 package ch.hslu.oop.sw08;
 
-import ch.hslu.oop.sw10.temperature.DefaultTemperatureSequence;
-import ch.hslu.oop.sw10.temperature.TemperatureSequence;
+
 import nl.jqno.equalsverifier.EqualsVerifier;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
