@@ -1,16 +1,21 @@
 package ch.hslu.oop.sw11;
 
+import ch.hslu.oop.sw11.io.ExperimentalDataWriter;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class DataWriterTest {
+class ExperimentalDataWriterTest {
+    private ExperimentalDataWriter writer;
+
+    @BeforeEach
+    public void setUp() {
+        writer = new ExperimentalDataWriter();
+    }
 
     @Test
     void writeNumber() {
-        // arrange
-        var writer = new DataWriter();
-
         // act
         writer.writeNumber(23);
     }
@@ -18,7 +23,6 @@ class DataWriterTest {
     @Test
     void readNumber() {
         // arrange
-        var writer = new DataWriter();
         writer.writeNumber(23);
 
         // act
@@ -30,10 +34,16 @@ class DataWriterTest {
 
     @Test
     void writeString() {
-        // arrange
-        var writer = new DataWriter();
-
         // act
         writer.writeString("Das ist ein Test mit ä ö ü");
+    }
+
+    @Test
+    void testReadAndWriteMultiple() {
+        // act
+        var result = writer.readAndWriteMultiple(60D, 32);
+
+        // assert
+        assertEquals("Double value: 60.0,Int value: 32", result);
     }
 }
